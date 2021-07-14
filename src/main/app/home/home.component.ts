@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from 'src/main/app/api.service';
+
+// src/main/app/api.service.ts
+interface Data {
+	id: number, 
+	name: string,
+	description: string,
+	price: number,
+	imageUrl: string,
+	quantity: number
+  }
 
 @Component({
   selector: 'app-home',
@@ -7,23 +17,17 @@ import { ApiService } from '../api.service';
   styleUrls: ['./home.component.css']
 })
 
-// export class HomeComponent {
+export class HomeComponent implements OnInit{
 
-//   products: any[] = [];
-//   constructor(private apiService: ApiService) { }
-//   ngOnInIt() {
-//     // this.products = this.apiService.get();
-//   }
-// }
-
-export class HomeComponent implements OnInit {
-	products = [];
-	constructor(private apiService: ApiService) { }
-	ngOnInit() {
-		this.apiService.get().subscribe((data: any=> {  
-			console.log(data);  
-			this.products = data;  
-		})  
+  products: Data[] = [];
+  constructor(private apiService: ApiService) { 
+	  this.apiService.getProduct().subscribe(data=> { 
+		  this.products = data;
+		  console.log(data);
+		})
 	}
-}
+	ngOnInit() {
+		
+	}	
 
+}
