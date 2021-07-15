@@ -1,4 +1,4 @@
-package src.main.java;
+package src.java;
 
 @Entity
 @Table(name = "pin")
