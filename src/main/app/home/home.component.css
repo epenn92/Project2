@@ -2,3 +2,8 @@ img {
     max-height: 120px;
     max-width: 120px;
 }
+
+#map {
+    height: 400px;
+    width: 100%;
+}

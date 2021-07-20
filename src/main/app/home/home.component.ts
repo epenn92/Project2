@@ -9,25 +9,28 @@ interface Data {
 	price: number,
 	imageUrl: string,
 	quantity: number
-  }
+}
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
+
+
 
 export class HomeComponent implements OnInit{
 
-  products: Data[] = [];
-  constructor(private apiService: ApiService) { 
-	  this.apiService.getProduct().subscribe(data=> { 
-		  this.products = data;
-		  console.log(data);
+    products: Data[] = [];
+    constructor(private apiService: ApiService) { 
+		this.apiService.getProduct().subscribe(data=> { 
+		this.products = data;
+		console.log(data);
 		})
 	}
 	ngOnInit() {
-		
+
 	}	
 
 }
+

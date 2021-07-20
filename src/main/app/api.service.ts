@@ -25,3 +25,5 @@ export class ApiService {
     return this.httpClient.get<Data[]>(url);
   }
 }
+// angular connects to server page which then forwards the request to servlet httprequest page which then forwards to database request etc? you want to eventually hit target 
+// google firebase good logon api

@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { ApiService } from './api.service';
+import { GoogleMapsModule } from '@angular/google-maps';
+
 
 
 
@@ -31,7 +33,9 @@ import { ApiService } from './api.service';
     MatToolbarModule, 
     MatCardModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleMapsModule,
+
   ],
   providers: [ ApiService ],
   bootstrap: [AppComponent]
