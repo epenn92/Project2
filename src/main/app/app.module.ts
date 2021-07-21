@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { ApiService } from './api.service';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { InitalPosService } from './inital-pos.service';
 
 
 
@@ -37,7 +38,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     GoogleMapsModule,
 
   ],
-  providers: [ ApiService ],
+  providers: [ ApiService, InitalPosService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
