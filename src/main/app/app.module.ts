@@ -12,6 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { ApiService } from './api.service';
+import { GoogleMapsModule } from '@angular/google-maps';
+
+
 
 
 @NgModule({
@@ -28,9 +32,12 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatToolbarModule, 
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    HttpClientModule,
+    GoogleMapsModule,
+
   ],
-  providers: [],
+  providers: [ ApiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
