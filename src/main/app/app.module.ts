@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ApiService } from './api.service';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { InitalPosService } from './inital-pos.service';
+import { MarkerDataService } from './marker-data.service';
 
 
 
@@ -38,7 +39,7 @@ import { InitalPosService } from './inital-pos.service';
     GoogleMapsModule,
 
   ],
-  providers: [ ApiService, InitalPosService ],
+  providers: [ ApiService, InitalPosService, MarkerDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

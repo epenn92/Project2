@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MapMarker } from '@angular/google-maps';
+import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { _countGroupLabelsBeforeOption } from '@angular/material/core';
 import { InitalPosService } from '../inital-pos.service';
+import { MarkerDataService } from '../marker-data.service';
+
+interface Marker{
+  // user: String, 
+  // description: String,
+  // lat: Number,
+  // lng: Number,
+  position: google.maps.LatLngLiteral,
+
+}
 
 @Component({
   selector: 'app-about',
@@ -10,29 +20,29 @@ import { InitalPosService } from '../inital-pos.service';
 })
 export class AboutComponent implements OnInit {
 
-  
-  // addMarker() {
-    //   this.markers.push({
-      //     position: {
-        //       lat: this.center.lat + ((Math.random() - 0.5) * 2) / 10,
-        //       lng: this.center.lng + ((Math.random() - 0.5) * 2) / 10,
-        //     },
-        //     label: {
-          //       color: 'red',
-          //       text: 'Marker label ' + (this.markers.length + 1),
-          //     },
-          //     title: 'Marker title ' + (this.markers.length + 1),
-          //     options: { animation: google.maps.Animation.BOUNCE },
-          //   })
-          // }
-          // title : String = "Google Maps Page";
-          // latitude: number = 39.21997198259251;
-          // longitude: number =  -77.31031331941422;
-          // 38.95178564092683, -77.34949721709066
-
-constructor(private initalPosService : InitalPosService) {
-  
-}
+ 
+  markers: Marker[] =[];
+  // markers1: any[] = [];
+  markers1: any[] = [{ 
+    position: { lat: 33, lng: -84, },
+    // map: google.maps.Map,
+    title: "test1"
+  },
+  {
+    position: { lat: 35, lng: - 85},
+    title: "test2"
+  }
+];
+  // coordinates: PositionData = { lat:number, lng: number}
+  constructor(private initalPosService : InitalPosService, private markerDataService : MarkerDataService) {
+      // this.initalPosService.getPosition().subscribe(pos=> {
+      // })
+      this.markerDataService.getMarkerData().subscribe(data => { 
+        this.markers = data;
+        console.log(data)
+      })
+  }
+user: String = "epenn920@gmail.com";
 title: String = "Google Maps Page";
 center: google.maps.LatLngLiteral = {
   lat: 37.09024, 
@@ -48,12 +58,14 @@ options: google.maps.MapOptions = {
   minZoom: 3,
   
 }
-// coordinates: any;
+
+// markers: Array<Marker> = [];
+
 ngOnInit(): void {
   console.log(this.center);
   
   let map = this.getMap();
-  
+  this.getInitialMarkers(map);
   google.maps.event.addListener(map, "click", (event) => {
     this.addMarkers(event.latLng, map)
   });
@@ -63,8 +75,8 @@ ngOnInit(): void {
     //     this.addMarkers(event.latLng, map);
     //   });
     
+    // }
   }
-  // }
 getMap = () => {
   const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
     zoom: 4,
@@ -96,24 +108,59 @@ getPos = () => {
     )
   }
   
-  addMarkers(location: google.maps.LatLngLiteral, map: google.maps.Map): void {
-    const label = "ABCDEF"
-    let labelIndex: number = 0;
-    if(labelIndex < 6) {
-
-      new google.maps.Marker({
-        
-        position: location,
-        label: label[labelIndex++ % label.length],
+  getInitialMarkers(map: google.maps.Map) {
+    for ( let i = 0; i < this.markers1.length; i++) {
+      const marker = new google.maps.Marker({
+        position: this.markers1[i].position,
         map: map,
+        title: this.markers1[i].description,
       })
     }
-    // else {
-    //   label.
-    // }
-  console.log(location);
-  console.log(label)
-  console.log(labelIndex)
+  }
+
+  getInfoWindowContent() {
+    const contentString = prompt("Enter description") as string;
+    console.log(contentString)
+    return contentString
+    // const getInput = document.createElement('label');
+    // getInput.innerHTML = "Enter description for pin";
+    // getInput.setAttribute('id', '#info');
+    // const sendInput = document.createElement('button');
+    // sendInput.innerHTML = 'Submit'
+    // sendInput.addEventListener('click', () => {
+    //   return getInput.innerHTML;
+    // })
+    
+  }
+
+  addMarkers(location: google.maps.LatLngLiteral, map: google.maps.Map): void {
+    const label = `${this.user}`
+    let labelIndex: number = 0;
+    const infoWindow = new google.maps.InfoWindow({
+    })
+    infoWindow.setContent(this.getInfoWindowContent());
+    const description = infoWindow.getContent() as string;
+    const marker = new google.maps.Marker({
+      
+      position: location,
+      label: label[labelIndex++ % label.length],
+      map: map,
+      title: description,
+      // p
+      
+    })
+    if(this.markers1.length < 7) {
+      this.markers1.push(marker);
+    }
+    else {
+      this.markers1.shift();
+      this.markers1.push(marker);
+    }
+    console.log(location);
+    console.log(label)
+    console.log(description)
+    console.log(this.markers1.length)
+    // this.getMap();
 }
     // marker: google.maps.MapsEventListener = {
     //   remove:
