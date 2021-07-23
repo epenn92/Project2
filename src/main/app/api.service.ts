@@ -16,7 +16,7 @@ interface Data {
 })
 export class ApiService {
 
-  private SERVER_URL = "http://localhost:3000/products";
+  private SERVER_URL = "http://localhost:8000";
   constructor(private httpClient: HttpClient) { }
 
   public getProduct() : Observable<Data[]> {

@@ -17,8 +17,6 @@ interface Data {
     styleUrls: ['./home.component.css']
 })
 
-
-
 export class HomeComponent implements OnInit{
 
     products: Data[] = [];
@@ -32,5 +30,8 @@ export class HomeComponent implements OnInit{
 
 	}	
 
+  gotoUser(){
+    this.router.navigate(['/user']);
+  }
 }
 

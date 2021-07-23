@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import {UserComponent} from "./components/user/user.component";
+import {MapComponent} from "./components/map/map.component";
+
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -17,10 +22,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    MapComponent,
+    UserComponent,
     HomeComponent,
     AboutComponent
   ],
@@ -28,9 +34,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatIconModule,
-    MatToolbarModule, 
+    MatToolbarModule,
     MatCardModule,
     MatProgressSpinnerModule,
     HttpClientModule,
