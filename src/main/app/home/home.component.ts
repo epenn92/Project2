@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { User } from './models';
-import { UserService } from '@app/services';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user.service';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
   loading = false;
-  users: User[];
+  users: User[] | undefined;
 
   constructor(private userService: UserService) { }
 

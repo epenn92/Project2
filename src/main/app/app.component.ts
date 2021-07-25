@@ -6,7 +6,7 @@ import { User } from './models/user.model';
 
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
- protected user: User | undefined;
+  public user: User | undefined;
 
   constructor(
     private router: Router,
@@ -15,7 +15,12 @@ export class AppComponent {
     this.authenticationService.user.subscribe(x => this.user = x);
   }
 
+  userHome(){
+    this.router.navigate(['/user'])
+  }
+
   logout() {
     this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

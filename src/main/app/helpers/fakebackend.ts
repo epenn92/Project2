@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-import { User } from '@app/models/user.model';
+import { User } from '../models/user.model';
 
 const users: User[] = [{ username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
 
@@ -38,21 +38,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const user = users.find(x => x.username === username && x.password === password);
       if (!user) return error('Username or password is incorrect');
       return ok({
-        username: user.username,
-        password: user.password,
-        firstName: user.firstName,
-        lastName: user.lastName
+        body: {
+          username: user.username,
+          password: user.password,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
       })
     }
 
     function getUsers() {
       if (!isLoggedIn()) return unauthorized();
-      return ok(users);
+      return ok({body: users});
     }
 
     // helper functions
 
-    function ok(body?) {
+    function ok({body}: { body?: any }) {
       return of(new HttpResponse({ status: 200, body }))
     }
 

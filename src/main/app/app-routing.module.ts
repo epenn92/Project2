@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent} from "./components/user/user.component";
 import { AuthGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: 'user', component: UserComponent}
 ];
 
 @NgModule({
