@@ -16,6 +16,8 @@ import { ApiService } from './api.service';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { InitalPosService } from './inital-pos.service';
 import { MarkerDataService } from './marker-data.service';
+import { LoginComponent } from './login/login.component';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 
@@ -24,7 +26,8 @@ import { MarkerDataService } from './marker-data.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,8 @@ import { MarkerDataService } from './marker-data.service';
     MatProgressSpinnerModule,
     HttpClientModule,
     GoogleMapsModule,
+    // FormsModule,
+    ReactiveFormsModule,
 
   ],
   providers: [ ApiService, InitalPosService, MarkerDataService ],

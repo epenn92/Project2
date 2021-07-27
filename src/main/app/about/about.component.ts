@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { _countGroupLabelsBeforeOption } from '@angular/material/core';
+
 import { InitalPosService } from '../inital-pos.service';
 import { MarkerDataService } from '../marker-data.service';
+import { ApiService } from '../api.service';
+import { Observable } from 'rxjs';
+import { Pins } from './Pins';
 
-interface Marker{
-  // user: String, 
-  // description: String,
+
+interface MarkerData{
+  // user: string, 
+  title: string,
   // lat: Number,
   // lng: Number,
   position: google.maps.LatLngLiteral,
@@ -19,13 +24,12 @@ interface Marker{
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-
+  // pins$: Observable<Pins[]>
  
-  markers: Marker[] =[];
+  markers: MarkerData[] =[];
   // markers1: any[] = [];
   markers1: any[] = [{ 
     position: { lat: 33, lng: -84, },
-    // map: google.maps.Map,
     title: "test1"
   },
   {
@@ -33,14 +37,19 @@ export class AboutComponent implements OnInit {
     title: "test2"
   }
 ];
+  pins: any;
   // coordinates: PositionData = { lat:number, lng: number}
-  constructor(private initalPosService : InitalPosService, private markerDataService : MarkerDataService) {
+  constructor(private initalPosService : InitalPosService, private markerDataService : MarkerDataService,
+    private apiService : ApiService) {
       // this.initalPosService.getPosition().subscribe(pos=> {
       // })
-      this.markerDataService.getMarkerData().subscribe(data => { 
-        this.markers = data;
-        console.log(data)
-      })
+      // this.pins = this.apiService.fetchAll().subscribe(data => {
+      //   this.pins = data;
+      // })
+      // this.markerDataService.getMarkerData().subscribe(data => { 
+      //   this.markers = data;
+      //   console.log(data)
+      // })
   }
 user: String = "epenn920@gmail.com";
 title: String = "Google Maps Page";
@@ -62,13 +71,17 @@ options: google.maps.MapOptions = {
 // markers: Array<Marker> = [];
 
 ngOnInit(): void {
-  console.log(this.center);
+  // console.log(this.center);
   
-  let map = this.getMap();
-  this.getInitialMarkers(map);
-  google.maps.event.addListener(map, "click", (event) => {
-    this.addMarkers(event.latLng, map)
-  });
+  this.apiService.fetchAll().subscribe(
+    data => console.log(data),
+    error => console.log('error')
+  )
+  // let map = this.getMap();
+  // this.getInitialMarkers(map);
+  // google.maps.event.addListener(map, "click", (event) => {
+  //   this.addMarkers(event.latLng, map)
+  // });
   
   // this.addMarkers(bangalore, map);
   //   google.maps.event.addListener(map, "dblclick", (event) => {
@@ -109,13 +122,14 @@ getPos = () => {
   }
   
   getInitialMarkers(map: google.maps.Map) {
-    for ( let i = 0; i < this.markers1.length; i++) {
-      const marker = new google.maps.Marker({
-        position: this.markers1[i].position,
-        map: map,
-        title: this.markers1[i].description,
-      })
-    }
+    // for ( let i = 0; i < this.pins$.length; i++) {
+    //   const marker = new google.maps.Marker({
+    //     position: this.markers1[i].position,
+    //     map: map,
+    //     title: this.markers1[i].description,
+    //   })
+    // }
+    console.log(this.pins);
   }
 
   getInfoWindowContent() {

@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit{
 
     products: Data[] = [];
     constructor(private apiService: ApiService) { 
-		this.apiService.getProduct().subscribe(data=> { 
+		this.apiService.fetchAll().subscribe(data=> { 
 		this.products = data;
 		console.log(data);
 		})

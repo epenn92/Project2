@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { Pins } from './about/Pins';
+
 
 interface Data {
   id: number, 
@@ -16,13 +19,13 @@ interface Data {
 })
 export class ApiService {
 
-  private SERVER_URL = "http://localhost:3000/products";
+  private url = "http://localhost:8080/api/getUserPins";
   constructor(private httpClient: HttpClient) { }
+  
+  fetchAll() : Observable<any> {
 
-  public getProduct() : Observable<Data[]> {
-    
-    let url = this.SERVER_URL;
-    return this.httpClient.get<Data[]>(url);
+    return this.httpClient.get<any>(this.url, { responseType: "json"})
+  
   }
 }
 // angular connects to server page which then forwards the request to servlet httprequest page which then forwards to database request etc? you want to eventually hit target 
