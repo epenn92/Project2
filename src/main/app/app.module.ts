@@ -19,6 +19,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { ApiService } from './api.service';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { InitalPosService } from './inital-pos.service';
+import { MarkerDataService } from './marker-data.service';
+import { LoginComponent } from './login/login.component';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 
@@ -28,7 +32,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MapComponent,
     UserComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +46,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatProgressSpinnerModule,
     HttpClientModule,
     GoogleMapsModule,
+    // FormsModule,
+    ReactiveFormsModule,
 
   ],
-  providers: [ ApiService ],
+  providers: [ ApiService, InitalPosService, MarkerDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

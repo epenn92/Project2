@@ -1,12 +1,12 @@
-<p>{{ title }}</p>
-<div class="my-google-map">
-    <google-map 
+<div class="my-google-map" id="map">
+    <!-- <google-map id="map"
         height="500px"
         width="100%"
         [zoom]="zoom"
-        [center]="center"
         [options]="options"
-        ></google-map>
+        ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"
+        events="map.events"
+        ></google-map> -->
     </div>
     <!-- [marker]="markers" -->
     <!-- [longitude] = "longitude" 
